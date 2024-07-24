@@ -54,12 +54,12 @@ This application displays all members from the server. Once a specific member is
 
 1. **Clone the repository**:
 
-   git clone https://github.com/miriamnussbacher/menu-app.git
-   cd Menu-app
-   npm install
-   npm run dev
+  - git clone https://github.com/miriamnussbacher/menu-app.git
+  - cd Menu-app
+  - npm install
+  - npm run dev
 
-   (add env file if needed and change settings)
+  - (add env file if needed and change settings)
 
 
   
