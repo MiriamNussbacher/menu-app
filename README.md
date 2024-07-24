@@ -26,14 +26,42 @@ This application displays all members from the server. Once a specific member is
 - **View Hierarchy**: Displays the full hierarchy of a selected member, up to the root member.
 - **Caching**: Data is cached using React Query to minimize network requests.
 
+## Components
+
+### App Component
+- **Description**: Manages the overall layout, fetches initial data, and maintains the selected member state.
+- **Responsibilities**:
+  - Fetches the initial list of parent members.
+  - Manages the state of the selected member.
+  - Renders the overall layout, including the AppBar and containers for the menu and hierarchy.
+  - Passes relevant data and handlers to `MenuComponent` and `HierarchyComponent`.
+
+### MenuComponent
+- **Description**: Renders a list of parent menu items and highlights the selected item.
+- **Responsibilities**:
+  - Renders the list of parent menu items, according to the data recieved from app.
+  - Highlights the selected menu item.
+  - Calls the provided click handler when a menu item is clicked.
+
+### HierarchyComponent
+- **Description**: Fetches and renders the hierarchy of the selected member, displaying loading and error messages as needed.
+- **Responsibilities**:
+  - Fetches the hierarchy of the selected member.
+  - Displays an error message if there is an issue fetching the data.
+  - Renders the hierarchy as a list of menu items.
 
 ### Steps
 
 1. **Clone the repository**:
 
    git clone https://github.com/miriamnussbacher/menu-app.git
+   cd Menu-app
+   npm install
+   npm run dev
 
-   
+   (add env file if needed and change settings)
+
+
   
 
 
