@@ -67,21 +67,3 @@ button:focus-visible {
   }
 }
 
-.MuiMenu-list {
-  background-color: #b0ce19;
-  padding: 10px;
-}
-
-
-
-.Mui-selected{
-  background-color: #b0ce19;
-  padding: 10px;
-  color: aqua;
-}
-
-.MuiMenuItem-root {
-  padding: 8px 16px;
-  background-color: #ce197d;
-  cursor: pointer;
-}

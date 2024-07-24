@@ -42,20 +42,34 @@
 }
 
 div .MuiMenu-list {
-  background-color: #b0ce19;
   padding: 10px;
 }
 
 
 
 div .Mui-selected{
-  background-color: #b0ce19;
   padding: 10px;
-  color: aqua;
 }
 
 div .MuiMenuItem-root {
   padding: 8px 16px;
-  background-color: #ce197d;
   cursor: pointer;
+}
+
+.container {
+  display: flex;
+}
+
+.menu {
+  width: 250px;
+  border-right: 1px solid #ccc;
+}
+
+.selected {
+  background-color: #f0f0f0;
+}
+
+.hierarchy {
+  width: 250px; 
+  border-left: 1px solid #ccc;
 }
