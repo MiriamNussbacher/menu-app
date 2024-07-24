@@ -24,7 +24,7 @@ This application displays all members from the server. Once a specific member is
 
 - **Display Members**: Fetches and displays a list of all members from the server.
 - **View Hierarchy**: Displays the full hierarchy of a selected member, up to the root member.
-- **Caching**: Data is cached using React Query to minimize redundant network requests.
+- **Caching**: Data is cached using React Query to minimize network requests.
 
 
 ### Steps
@@ -32,6 +32,8 @@ This application displays all members from the server. Once a specific member is
 1. **Clone the repository**:
 
    git clone https://github.com/miriamnussbacher/menu-app.git
+
+   
   
 
 

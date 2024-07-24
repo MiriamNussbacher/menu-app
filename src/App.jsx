@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import { AppBar, Toolbar, Typography, Container, MenuList, MenuItem, ListItemText, Paper } from '@mui/material';
-import { useQuery, QueryClient, QueryClientProvider } from 'react-query';
+import { AppBar, Typography, MenuList, MenuItem, ListItemText } from '@mui/material';
+import { useQuery, QueryClient } from 'react-query';
 import axios from 'axios';
 
 const queryClient = new QueryClient();
@@ -17,6 +17,7 @@ const fetchRoot = async () => {
   return response.data;
 }
 
+
 function App() {
   const [selectedMemberId, setSelectedMemberId] = useState(null);
 
@@ -24,28 +25,14 @@ function App() {
     setSelectedMemberId(memberId);
   };
 
-  const { data: parents } = useQuery('parents', fetchRoot,{
+
+  const { data: parents, error: parentsError } = useQuery('parents', fetchRoot,{
     staleTime: import.meta.env.VITE_QUERY_CACHE_TIME, 
     cacheTime: import.meta.env.VITE_QUERY_CACHE_TIME, 
     refetchOnWindowFocus: false,
   });
 
-  const renderMenuItems = (parents) => {
-    debugger
-    if (!parents) return null;
-    return parents.map((item) => {
-      return (
-        <MenuItem key={item.memberId} onClick={() => handleMenuItemClick(item.memberId)}
-          className={selectedMemberId === item.memberId ? 'selected' : ''}>
-          <ListItemText primary={item.name} />
-          <MenuList className='MuiMenuItem-root'>
-            {renderMenuItems(item.children)}
-          </MenuList>
-        </MenuItem>
-      );
 
-    });
-  };
 
   return (
     
@@ -57,16 +44,30 @@ function App() {
             </Typography>
     
         </AppBar>
+        {parentsError && <h1>Error fetching root data.</h1>}
       <MenuList className="menu">
-        {renderMenuItems(parents)}
+        {renderMenuItems(parents, selectedMemberId,handleMenuItemClick)}
       </MenuList>
       {selectedMemberId && <Hierarchy memberId={selectedMemberId} />}
     </div>
   )
 }
 
+const renderMenuItems = (parents,selectedMemberId,handleMenuItemClick) => {
+  if (!parents) return null;
+  return parents.map((item) => {
+    return (
+      <MenuItem key={item.memberId} onClick={() => handleMenuItemClick(item.memberId)}
+        className={selectedMemberId === item.memberId ? 'selected' : ''}>
+        <ListItemText primary={item.name} />
+      </MenuItem>
+    );
+
+  });
+};
+
 function Hierarchy({ memberId }) {
-  const { data: hierarchy } = useQuery(['hierarchy', memberId], () => fetchHierarchy(memberId), {
+  const { data: hierarchy, error:hierarchyError } = useQuery(['hierarchy', memberId], () => fetchHierarchy(memberId), {
     enabled: !!memberId, 
     staleTime: import.meta.env.VITE_QUERY_CACHE_TIME, 
     cacheTime: import.meta.env.VITE_QUERY_CACHE_TIME, 
@@ -74,6 +75,7 @@ function Hierarchy({ memberId }) {
   });
   
   if (!hierarchy) return null;
+  if (hierarchyError) return <h3>Error fetching children data.</h3>;
   return (
     <MenuList className="hierarchy">
       {hierarchy.map((member) => (
